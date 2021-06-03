@@ -3,20 +3,23 @@ package com.example.demo.service;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dtos.Customerdto;
+import com.example.demo.dtos.CustomerDto;
 import com.example.demo.entites.Customer;
+
+import java.util.List;
 
 @Component
 @Service
 
 public interface CustomerService {
 
-	Customer saveCustomer(Customerdto customerdto);
+	String saveCustomer(CustomerDto customerdto);
 
-	Customer getCustomerById(String customer_id);
+	CustomerDto getCustomerById(String customer_id);
 
-	Customer updateCustomer(Customerdto customerdto);
+	CustomerDto updateCustomer(CustomerDto customerdto);
 
 	public void  deleteCustomer(String customerid);
 
+	List<CustomerDto> getAllCustomers();
 }

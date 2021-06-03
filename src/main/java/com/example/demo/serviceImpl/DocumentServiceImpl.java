@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.dtos.Documentdto;
+import com.example.demo.dtos.DocumentDto;
 import com.example.demo.entites.Customer;
 import com.example.demo.entites.Document;
 import com.example.demo.repositories.CustomerRepository;
@@ -20,7 +20,7 @@ public class DocumentServiceImpl implements DocumentService {
 	private CustomerRepository customerRepository;
 
 	@Override
-	public Document saveDocument(Documentdto documentdto, String customer_id) {
+	public Document saveDocument(DocumentDto documentdto, String customer_id) {
 		Document d = new Document();
 		d.setDocumnetId(documentdto.getDocumnetId());
 		d.setIssueingAurthority(documentdto.getIssueingAurthority());

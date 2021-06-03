@@ -12,18 +12,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "document")
 public class Document {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "document_id")
 	private String documnetId;
+
 	@Column(name = "type")
 	private String type;
+
 	@Column(name = "dateOfIssue")
 	private String dateOfIssue;
+
 	@Column(name = "dateOfExpiry")
 	private String dateOfExpiry;
+
 	@Column(name = "issueingAurthority")
 	private String issueingAurthority;
+
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;

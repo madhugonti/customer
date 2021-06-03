@@ -1,45 +1,47 @@
 package com.example.demo.entites;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "customer")
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	@Column(name = "customer_id")
 	private String customer_id;
+
 	@Column(name = "customer_Name")
 	private String customer_Name;
+
 	@Column(name = "dateofBirth")
-	private Date dateOfBirth;
+	private LocalDate dateOfBirth;
+
 	@Column(name = "gender")
 	private String gender;
+
 	@Column(name = "phone_Number")
 	private String phoneNumber;
-	@OneToMany(mappedBy = "customer")
-	private List<Document> listdoduments;
+
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Document> listdoduments = new ArrayList<>();
+
     public Customer(){
     	
     }
 	
-	public Customer(String customer_id, String customer_Name, Date dateOfBirth, String gender, String phoneNumber,
+	public Customer(String customer_id, String customer_Name, String dateOfBirth, String gender, String phoneNumber,
 			List<Document> listdoduments) {
 		super();
 		this.customer_id = customer_id;
 		this.customer_Name = customer_Name;
-		this.dateOfBirth = dateOfBirth;
+		this.dateOfBirth = LocalDate.parse(dateOfBirth, DateTimeFormatter.ISO_LOCAL_DATE);
 		this.gender = gender;
 		this.phoneNumber = phoneNumber;
 		this.listdoduments = listdoduments;
@@ -53,7 +55,7 @@ public class Customer {
 		return customer_Name;
 	}
 
-	public Date getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
@@ -73,7 +75,7 @@ public class Customer {
 		this.customer_Name = customer_Name;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
