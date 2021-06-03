@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
 		c.setDateOfBirth(LocalDate.parse(customerdto.getDateOfBirth(), DateTimeFormatter.ISO_LOCAL_DATE));
 		c.setGender(customerdto.getGender());
 		c.setPhoneNumber(customerdto.getPhoneNumber());
-//		c.setListdoduments(customerdto.getDocumentDtos().stream().map(i -> setDocuments(i, c)).collect(Collectors.toList()));
+		c.setListdoduments(customerdto.getDocumentDtos().stream().map(i -> setDocuments(i, c)).collect(Collectors.toList()));
 		Customer customer = customerRepository.save(c);
 		return customer.getCustomer_id();
 	}

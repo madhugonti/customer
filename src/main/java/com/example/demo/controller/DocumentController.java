@@ -19,14 +19,14 @@ public class DocumentController {
 	@Autowired
 	private DocumentService documentService;
 
-	@RequestMapping(name = "/savedocument", method = RequestMethod.POST)
-	public Document saveDocument(@RequestBody DocumentDto documentdto, @PathVariable String customer_id) {
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+	public DocumentDto saveDocument(@RequestBody DocumentDto documentdto, @PathVariable String customer_id) {
 		return documentService.saveDocument(documentdto, customer_id);
 
 	}
 
-	@RequestMapping(name = "/{customer_id}/documents", method = RequestMethod.GET)
-	public List<Document> getAllDocuments(@PathVariable String customer_id) {
+	@RequestMapping(value = "/{customer_id}/documents", method = RequestMethod.GET)
+	public List<DocumentDto> getAllDocuments(@PathVariable String customer_id) {
 		return documentService.getAllDocuments(customer_id);
 	}
 

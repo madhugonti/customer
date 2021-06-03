@@ -1,7 +1,10 @@
 package com.example.demo.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.example.demo.exceptions.CustomerIdNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,24 +23,27 @@ public class DocumentServiceImpl implements DocumentService {
 	private CustomerRepository customerRepository;
 
 	@Override
-	public Document saveDocument(DocumentDto documentdto, String customer_id) {
+	public DocumentDto saveDocument(DocumentDto documentdto, String customer_id) {
 		Document d = new Document();
-		d.setDocumnetId(documentdto.getDocumnetId());
+//		d.setDocumnetId(documentdto.getDocumnetId());
 		d.setIssueingAurthority(documentdto.getIssueingAurthority());
 		d.setDateOfIssue(documentdto.getDateOfIssue());
 		d.setDateOfExpiry(documentdto.getDateOfExpiry());
 		d.setType(documentdto.getType());
-		Customer customer = customerRepository.findById(customer_id).get();
-		d.setCustomer(customer);
-		Document document = documentRepository.save(d);
-		return document;
+		Optional<Customer> optionalCustomer = customerRepository.findById(customer_id);
+		if (!optionalCustomer.isPresent()) {
+			throw new CustomerIdNotFound();
+		}
+		d.setCustomer(optionalCustomer.get());
+		documentRepository.save(d);
+		return documentdto;
 	}
 
 	@Override
-	public List<Document> getAllDocuments(String customer_id) {
+	public List<DocumentDto> getAllDocuments(String customer_id) {
 	 List<Document> listdocuments =  documentRepository.findBycustomer(customer_id);
 
-		return listdocuments;
+		return listdocuments.stream().map(DocumentDto::new).collect(Collectors.toList());
 	}
 
 }

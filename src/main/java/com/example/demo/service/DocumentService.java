@@ -13,8 +13,8 @@ import com.example.demo.entites.Document;
 @Service
 public interface DocumentService {
 
-	Document saveDocument(DocumentDto documentdto, String customer_id);
+	DocumentDto saveDocument(DocumentDto documentdto, String customer_id);
 
-	public List<Document> getAllDocuments(@PathVariable String customer_id);
+	List<DocumentDto> getAllDocuments(@PathVariable String customer_id);
 
 }

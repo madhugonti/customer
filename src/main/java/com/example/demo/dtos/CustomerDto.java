@@ -38,7 +38,7 @@ public class CustomerDto {
 		this.dateOfBirth = customer.getDateOfBirth().format(DateTimeFormatter.ISO_LOCAL_DATE);
 		this.gender = customer.getGender();
 		this.phoneNumber = customer.getPhoneNumber();
-//		this.documentDtos = customer.getListdoduments().stream().map(DocumentDto::new).collect(Collectors.toList());
+		this.documentDtos = customer.getListdoduments().stream().map(DocumentDto::new).collect(Collectors.toList());
 	}
 
     public String getCustomer_id() {
